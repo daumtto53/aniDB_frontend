@@ -12,6 +12,7 @@ import Home from "./Home/Home";
 import Explorer from "./Discover/Explorer";
 import Discover from "./Discover/Discover";
 import PublicationInfo from "./Info/PublicationInfo";
+import PublisherInfo from "./Info/PublisherInfo";
 
 
 const router = createBrowserRouter(
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
         {/* <Route path="lightnovel" element={<LightNovel />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
         {/* <Route path="artist" element={<Artist />} /> */}
-        {/* <Route path="publisher" element={<Publisher />} /> */}
+        <Route path="publisher" element={<PublisherInfo />} />
         {/* <Route path="profile" element={<Profile />} /> */}
 
         {/* <Route path="manga" element={<Manga />} /> */}

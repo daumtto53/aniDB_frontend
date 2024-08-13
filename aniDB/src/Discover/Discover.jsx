@@ -66,7 +66,7 @@ export default function Discover() {
         <button className={styles.button}>Button Text</button>
       </div>
 
-      <div>
+      {/* <div>
         <a href="#prev">Prev</a>
         {Array.from({ length: 10 }, (_, i) => (
           <a
@@ -78,7 +78,7 @@ export default function Discover() {
           </a>
         ))}
         <a href="#next">Next</a>
-      </div>
+      </div> */}
       <Pagination 
         currentPage={currentPage}
         totalPages={totalPages}
