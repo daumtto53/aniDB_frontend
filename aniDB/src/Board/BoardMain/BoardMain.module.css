@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.table-container {
+    flex: 0 0 92%;
+}
+
+.pagination-container {
+    flex: 0 0 8%;
+}

@@ -17,6 +17,7 @@ import BoardWrite from "./Board/BoardWrite/BoardWrite";
 import BoardRead from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
+import BoardMain from "./Board/BoardMain/BoardMain";
 
 
 const router = createBrowserRouter(
@@ -47,6 +48,8 @@ const router = createBrowserRouter(
         <Route path="boardread" element={<BoardRead/>} />
         <Route path="profile" element={<Profile/>} />
         <Route path="modifyprofile" element={<ModifyProfile />} />
+        <Route path="board" element={<BoardMain />} />
+
       </Route>
     </>
   )
