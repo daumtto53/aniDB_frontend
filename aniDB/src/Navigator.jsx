@@ -13,6 +13,7 @@ import Explorer from "./Discover/Explorer";
 import Discover from "./Discover/Discover";
 import PublicationInfo from "./Info/PublicationInfo";
 import PublisherInfo from "./Info/PublisherInfo";
+import BoardWrite from "./Board/BoardWrite/BoardWrite";
 
 
 const router = createBrowserRouter(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
         {/* <Route path="anime" element={<Anime />} /> */}
 
         <Route path="info" element={<PublicationInfo />} />
+        <Route path="boardwrite" element={<BoardWrite />} />
       </Route>
     </>
   )
