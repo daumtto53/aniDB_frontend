@@ -4,6 +4,7 @@ import Comments from "../Comments/Comments";
 
 import styles from "./PublicationInfo.module.css";
 import LikeButton from "../Like/LikeButton";
+import { Link } from "react-router-dom";
 
 const commentData = [
   {
@@ -132,6 +133,9 @@ const PublicationInfo = () => {
       </div>
       <div className={styles.like}>
         <LikeButton />
+      </div>
+      <div className={styles['link-to-board']}>
+          <Link to="">Board</Link>
       </div>
       <Comments comments={commentData} />
     </div>

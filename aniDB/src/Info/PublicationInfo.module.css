@@ -78,3 +78,11 @@
   display: flex;
   justify-content: right;
 }
+
+.link-to-board {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 20px;
+  
+}
