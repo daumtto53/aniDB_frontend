@@ -14,6 +14,7 @@ import Discover from "./Discover/Discover";
 import PublicationInfo from "./Info/PublicationInfo";
 import PublisherInfo from "./Info/PublisherInfo";
 import BoardWrite from "./Board/BoardWrite/BoardWrite";
+import BoardRead from "./Board/BoardRead/BoardRead";
 
 
 const router = createBrowserRouter(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
 
         <Route path="info" element={<PublicationInfo />} />
         <Route path="boardwrite" element={<BoardWrite />} />
+        <Route path="boardread" element={<BoardRead/>} />
       </Route>
     </>
   )
