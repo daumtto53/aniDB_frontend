@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* Set height to 100% of viewport */
+  height: 100vh; 
+}
+
+.link-container {
+  /* Container styles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 8%; /* 8% height */
+}
+
+.main-area {
+  flex: 0 0 92%; /* 72% height */
+}
+
+.link {
+  /* Button-like styles */
+  margin: 0 auto;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.link.active {
+  /* Styles for the active link */
+  color: blue; /* Or your preferred color */
+  /* Other styles as needed */
+}
