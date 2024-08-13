@@ -1,0 +1,96 @@
+.container {
+    max-width: 50%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+.profileHeader {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cameraButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.profileInfo {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.inputGroup {
+    margin-bottom: 10px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.text {
+    margin: 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.modifyButton {
+    display: block;
+    width: 30%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.favorites {
+    text-align: left;
+}
+
+.favoritesTitle {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.favoritesSection {
+    margin-bottom: 20px;
+}
+
+.favoritesCategory {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.favoritesList {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.favoriteItem {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+}
+
