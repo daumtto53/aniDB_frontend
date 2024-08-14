@@ -4,6 +4,7 @@ import Pagination from './../../BasicComponents/Pagination';
 
  
 import styles from "./BoardMain.module.css";
+import SearchForm from '../../BasicComponents/SearchForm';
 
  const tableData = [
     { number: 1, title: 'Title 1', author: 'Author 1', recommended: 'Yes', views: 100, createdTime: '2024-08-13' },
@@ -16,6 +17,9 @@ function BoardMain() {
     <div className={styles.container}>
         <div className={styles['table-container']}>
             <BoardTable data={tableData}/>
+        </div>
+        <div>
+          <SearchForm />
         </div>
         <div className={styles['pagination-container']}>
             <Pagination currentPage={1} totalPages={100}/>
