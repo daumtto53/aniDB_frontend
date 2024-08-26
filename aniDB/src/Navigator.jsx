@@ -18,6 +18,7 @@ import BoardRead from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain from "./Board/BoardMain/BoardMain";
+import AdvancedSearch from "./AdvancedSearch/advancedSearch";
 
 
 const router = createBrowserRouter(
@@ -25,7 +26,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
-        {/* <Route path="search" element={<AdvancedSearch />} /> */}
+        <Route path="search" element={<AdvancedSearch />} />
         <Route path="explorer" element={<Explorer />} />
         <Route path="discover" element={<Discover />} />
         {/* <Route path="manga" element={<Manga />} /> */}

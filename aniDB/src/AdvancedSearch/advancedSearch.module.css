@@ -1,0 +1,58 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup select {
+  width: calc(100% - 10px);
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkboxGroup label {
+  margin-right: 15px;
+}
+
+.searchButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+}
