@@ -10,8 +10,8 @@ import {
 import RootLayout from "./Root/RootLayout";
 import Home from "./Home/Home";
 import Explorer from "./Discover/Explorer";
-import Discover from "./Discover/Discover";
-import PublicationInfo from "./Info/PublicationInfo";
+import Discover, { discoverLoader } from "./Discover/Discover";
+import PublicationInfo, { publicationInfoLoader } from "./Info/PublicationInfo";
 import PublisherInfo from "./Info/PublisherInfo";
 import BoardWrite from "./Board/BoardWrite/BoardWrite";
 import BoardRead from "./Board/BoardRead/BoardRead";
@@ -19,7 +19,6 @@ import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain from "./Board/BoardMain/BoardMain";
 import AdvancedSearch from "./AdvancedSearch/advancedSearch";
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +28,12 @@ const router = createBrowserRouter(
         <Route path="search" element={<AdvancedSearch />} />
         <Route path="explorer" element={<Explorer />} />
         <Route path="discover" element={<Discover />} />
+        {/* subject == [publication?type=manga.lightnovel | anime |  publisher | artist] */}
+        <Route
+          path="discover/:subject"
+          loader={discoverLoader}
+          element={<Discover />}
+        />
         {/* <Route path="manga" element={<Manga />} /> */}
         {/* <Route path="lightnovel" element={<LightNovel />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
@@ -44,13 +49,12 @@ const router = createBrowserRouter(
         {/* <Route path="anime" element={<Anime />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
 
-        <Route path="info" element={<PublicationInfo />} />
+        <Route path="info/:publicationId" loader={publicationInfoLoader} element={<PublicationInfo />} />
         <Route path="boardwrite" element={<BoardWrite />} />
-        <Route path="boardread" element={<BoardRead/>} />
-        <Route path="profile" element={<Profile/>} />
+        <Route path="boardread" element={<BoardRead />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="modifyprofile" element={<ModifyProfile />} />
         <Route path="board" element={<BoardMain />} />
-
       </Route>
     </>
   )

@@ -42,6 +42,10 @@
   padding: 8px;
 }
 
+.info-table .firstrow {
+  font-weight: bold;
+}
+
 .info-table tr.even {
   background-color: #f8f8f8;
 }
@@ -51,6 +55,7 @@
 }
 
 .middle-section {
+  margin-top: 2rem;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;

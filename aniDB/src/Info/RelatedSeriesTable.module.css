@@ -1,0 +1,27 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .headerRow {
+    background-color: #f3f4f6;
+  }
+  
+  .headerCell {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  .row {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .row:nth-child(even) {
+    background-color: #f9fafb;
+  }
+  
+  .cell {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem;
+  }

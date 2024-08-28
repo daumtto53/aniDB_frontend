@@ -1,0 +1,35 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+  }
+  
+  .headerRow {
+    background-color: #f3f4f6;
+  }
+  
+  .headerCell {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: bold;
+    color: #374151;
+  }
+  
+  .row {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .row:nth-child(even) {
+    background-color: #f9fafb;
+  }
+  
+  .cell {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    color: #1f2937;
+  }
+  
+  .cellCenter {
+    text-align: center;
+  }
