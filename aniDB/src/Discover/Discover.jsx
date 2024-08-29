@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Discover.module.css";
 import Pagination from "../BasicComponents/Pagination";
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
 import { discoverAxios } from "../API/API";
 
 export default function Discover() {
   /* query params */
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("type"));
+  const navigate = useNavigate();
 
   /* For Pagination */
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,8 +21,16 @@ export default function Discover() {
   const pageItems = loaderData['dtoList'];
   const pageInfo = loaderData['pageInfoDTO'];
 
+  console.log(pageInfo);
+  useEffect(() => {
+    // This effect runs once when the component mounts
+    setCurrentPage(pageInfo.page);
+    setTotalPages(pageInfo.totalPage);
+  }, [pageInfo.page, pageInfo.totalPage]);
+
+
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    navigate(`?page=${page}`);
     // Load Page for new page.
   };
 
