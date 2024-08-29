@@ -45,44 +45,46 @@ export default function Discover() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.grid}>
-        {pageItems.map((item) => (
-          <div key={item.publicationId}>
-            <p className={styles.ranking}>ranking : {item.ranked}</p>
-            <img
-              className={styles.image}
-              src={item.coverImageUrl}
-              alt={`Image ${item.id}`}
-            />
-            <Link to={`/info/${item.publicationId}`}>{item.title}</Link>
-          </div>
-        ))}
-      </div>
+    loaderData.subjectPath === "publication" && (
+      <div className={styles.container}>
+        <div className={styles.grid}>
+          {pageItems.map((item) => (
+            <div key={item.publicationId}>
+              <p className={styles.ranking}>ranking : {item.ranked}</p>
+              <img
+                className={styles.image}
+                src={item.coverImageUrl}
+                alt={`Image ${item.id}`}
+              />
+              <Link to={`/info/publication/${item.publicationId}`}>{item.title}</Link>
+            </div>
+          ))}
+        </div>
 
-      {/* Form Tag로 수정. */}
-      <Form className={styles.controls} method="post">
-        <select name="option" className={styles.dropdown}>
-          <option value="title">제목</option>
-          <option value="titleOrDescription">제목 + 내용</option>
-        </select>
-        <input
-          type="text"
-          name="searchQuery"
-          placeholder="Search"
-          className={styles.searchInput}
+        {/* Form Tag로 수정. */}
+        <Form className={styles.controls} method="post">
+          <select name="option" className={styles.dropdown}>
+            <option value="title">제목</option>
+            <option value="titleOrDescription">제목 + 내용</option>
+          </select>
+          <input
+            type="text"
+            name="searchQuery"
+            placeholder="Search"
+            className={styles.searchInput}
+          />
+          <button type="submit" className={styles.button}>
+            Search
+          </button>
+        </Form>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
         />
-        <button type="submit" className={styles.button}>
-          Search
-        </button>
-      </Form>
-
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
-    </div>
+      </div>
+    )
   );
 }
 
@@ -115,14 +117,13 @@ export async function discoverLoader({ params, request }) {
           "/publication",
           config
         );
-        console.log(publicationResponse.data);
-        return publicationResponse.data;
+        return { subjectPath, ...publicationResponse.data };
       case "anime":
 
       case "publisher":
         const publisherResponse = await discoverAxios.get("/publisher", config);
         console.log(publisherResponse);
-        return publisherResponse.data;
+        return { subjectPath, ...publisherResponse.data };
 
       case "artist":
     }
@@ -150,7 +151,7 @@ export async function discoverAction({ params, request }) {
   const newSearchParams = new URLSearchParams(url.searchParams);
   newSearchParams.set("option", option);
   if (searchQuery) newSearchParams.set("searchQuery", searchQuery);
-  if (searchQuery === '') newSearchParams.delete("searchQuery");
+  if (searchQuery === "") newSearchParams.delete("searchQuery");
   newSearchParams.set("page", requestPageNum);
 
   // Create the new URL

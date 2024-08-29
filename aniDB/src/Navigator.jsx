@@ -50,7 +50,7 @@ const router = createBrowserRouter(
         {/* <Route path="anime" element={<Anime />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
 
-        <Route path="info/:publicationId" loader={publicationInfoLoader} element={<PublicationInfo />} />
+        <Route path="info/publication/:publicationId" loader={publicationInfoLoader} element={<PublicationInfo />} />
         <Route path="boardwrite" element={<BoardWrite />} />
         <Route path="boardread" element={<BoardRead />} />
         <Route path="profile" element={<Profile />} />
