@@ -13,23 +13,15 @@ import {
 import { discoverAxios } from "../API/API";
 
 export default function Discover() {
-  /* query params */
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("type"));
   const navigate = useNavigate();
+  const loaderData = useLoaderData();
+  const { subjectPath, dtoList: pageItems, pageInfoDTO: pageInfo } = loaderData;
 
-  /* For Pagination */
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(100);
 
-  /* Loader에서 정보 가져오기. */
-  const loaderData = useLoaderData();
-  console.log("loaderData = ", loaderData);
-  const pageItems = loaderData["dtoList"];
-  const pageInfo = loaderData["pageInfoDTO"];
-
   useEffect(() => {
-    // This effect runs once when the component mounts
     setCurrentPage(pageInfo.page);
     setTotalPages(pageInfo.totalPage);
   }, [pageInfo.page, pageInfo.totalPage]);
@@ -41,50 +33,85 @@ export default function Discover() {
       `&option=${searchParams.get("option")}` +
       `&searchQuery=${searchParams.get("searchQuery")}`;
     navigate(url);
-    // Load Page for new page.
+  };
+
+  const renderPublicationItem = (item) => (
+    <div key={item.publicationId}>
+      <p className={styles.ranking}>ranking : {item.ranked}</p>
+      <img
+        className={styles.image}
+        src={item.coverImageUrl}
+        alt={`Cover for ${item.title}`}
+      />
+      <Link to={`/info/publication/${item.publicationId}`}>{item.title}</Link>
+    </div>
+  );
+
+  const renderAuthorItem = (item) => (
+    <div key={item.publisherId}>
+      <img
+        className={styles.image}
+        src={item.profileImageUrl}
+        alt={`Profile of ${item.name}`}
+      />
+      <Link to={`/info/author/${item.authorId}`}>{item.name}</Link>
+    </div>
+  );
+
+  const renderPublisherItem = (item) => (
+    <div key={item.publisherId}>
+      <p>하위 레이블: {item.descendantPublicationCount}</p>
+      <img
+        className={styles.image}
+        src="https://www.ebscoind.com/wp-content/uploads/2018/08/publishers_warehouse_logo-1-2.jpg"
+        alt={`Cover for ${item.title}`}
+      />
+      <Link to={`/info/publisher/${item.publisherId}`}>
+        {item.publisherName}
+      </Link>
+    </div>
+  );
+
+  const renderItems = () => {
+    switch (subjectPath) {
+      case "publication":
+        return pageItems.map(renderPublicationItem);
+      case "author":
+        return pageItems.map(renderAuthorItem);
+      case "publisher":
+        console.log("publiehr", pageItems);
+        return pageItems.map(renderPublisherItem);
+      default:
+        return <p>Unknown subject path: {subjectPath}</p>;
+    }
   };
 
   return (
-    loaderData.subjectPath === "publication" && (
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          {pageItems.map((item) => (
-            <div key={item.publicationId}>
-              <p className={styles.ranking}>ranking : {item.ranked}</p>
-              <img
-                className={styles.image}
-                src={item.coverImageUrl}
-                alt={`Image ${item.id}`}
-              />
-              <Link to={`/info/publication/${item.publicationId}`}>{item.title}</Link>
-            </div>
-          ))}
-        </div>
+    <div className={styles.container}>
+      <div className={styles.grid}>{renderItems()}</div>
 
-        {/* Form Tag로 수정. */}
-        <Form className={styles.controls} method="post">
-          <select name="option" className={styles.dropdown}>
-            <option value="title">제목</option>
-            <option value="titleOrDescription">제목 + 내용</option>
-          </select>
-          <input
-            type="text"
-            name="searchQuery"
-            placeholder="Search"
-            className={styles.searchInput}
-          />
-          <button type="submit" className={styles.button}>
-            Search
-          </button>
-        </Form>
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
+      <Form className={styles.controls} method="post">
+        <select name="option" className={styles.dropdown}>
+          <option value="title">제목</option>
+          <option value="titleOrDescription">제목 + 내용</option>
+        </select>
+        <input
+          type="text"
+          name="searchQuery"
+          placeholder="Search"
+          className={styles.searchInput}
         />
-      </div>
-    )
+        <button type="submit" className={styles.button}>
+          Search
+        </button>
+      </Form>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </div>
   );
 }
 
