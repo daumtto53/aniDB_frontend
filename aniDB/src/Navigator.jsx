@@ -10,7 +10,7 @@ import {
 import RootLayout from "./Root/RootLayout";
 import Home from "./Home/Home";
 import Explorer from "./Discover/Explorer";
-import Discover, { discoverLoader } from "./Discover/Discover";
+import Discover, { discoverAction, discoverLoader } from "./Discover/Discover";
 import PublicationInfo, { publicationInfoLoader } from "./Info/PublicationInfo";
 import PublisherInfo from "./Info/PublisherInfo";
 import BoardWrite from "./Board/BoardWrite/BoardWrite";
@@ -32,6 +32,7 @@ const router = createBrowserRouter(
         <Route
           path="discover/:subject"
           loader={discoverLoader}
+          action={discoverAction}
           element={<Discover />}
         />
         {/* <Route path="manga" element={<Manga />} /> */}
