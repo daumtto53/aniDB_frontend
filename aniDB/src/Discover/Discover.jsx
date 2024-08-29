@@ -60,7 +60,7 @@ export default function Discover() {
 
   const renderPublisherItem = (item) => (
     <div key={item.publisherId}>
-      <p>하위 레이블: {item.descendantPublicationCount}</p>
+      <p>출판물 개수: {item.descendantPublicationCount}</p>
       <img
         className={styles.image}
         src="https://www.ebscoind.com/wp-content/uploads/2018/08/publishers_warehouse_logo-1-2.jpg"
@@ -79,7 +79,6 @@ export default function Discover() {
       case "author":
         return pageItems.map(renderAuthorItem);
       case "publisher":
-        console.log("publiehr", pageItems);
         return pageItems.map(renderPublisherItem);
       default:
         return <p>Unknown subject path: {subjectPath}</p>;

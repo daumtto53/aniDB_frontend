@@ -12,7 +12,7 @@ import Home from "./Home/Home";
 import Explorer from "./Discover/Explorer";
 import Discover, { discoverAction, discoverLoader } from "./Discover/Discover";
 import PublicationInfo, { publicationInfoLoader } from "./Info/PublicationInfo";
-import PublisherInfo from "./Info/PublisherInfo";
+import PublisherInfo, { publisherInfoLoader } from "./Info/PublisherInfo";
 import BoardWrite from "./Board/BoardWrite/BoardWrite";
 import BoardRead from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
@@ -51,6 +51,7 @@ const router = createBrowserRouter(
         {/* <Route path="anime" element={<Anime />} /> */}
 
         <Route path="info/publication/:publicationId" loader={publicationInfoLoader} element={<PublicationInfo />} />
+        <Route path="info/publisher/:publisherId" loader={publisherInfoLoader} element={<PublisherInfo/>} />
         <Route path="boardwrite" element={<BoardWrite />} />
         <Route path="boardread" element={<BoardRead />} />
         <Route path="profile" element={<Profile />} />

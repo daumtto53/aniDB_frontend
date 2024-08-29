@@ -1,67 +1,73 @@
-.info-page {
+.container {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f0f4f8;
   font-family: Arial, sans-serif;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.title {
+  font-size: 2.5rem;
+  color: #333;
   margin-bottom: 20px;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
+  text-align: center;
 }
 
-header h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-.attributes {
-  display: flex;
-  flex-wrap: wrap;
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.attribute-group {
-  flex: 1 1 45%;
+.infoItem {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
 }
 
-.attribute {
-  background-color: #f8f8f8;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.attribute strong {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.attribute p {
-  margin: 0;
-}
-
-.licensed-series {
-  background-color: #e0e7ef;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.licensed-series strong {
-  display: block;
+.infoTitle {
+  font-size: 1.2rem;
+  color: #444;
   margin-bottom: 10px;
 }
 
-.licensed-series ul {
+.list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
-.licensed-series li {
+.list li {
   margin-bottom: 5px;
+}
+
+.link {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.publications {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.publicationList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.publicationItem {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

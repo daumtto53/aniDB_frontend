@@ -1,66 +1,99 @@
 import React from 'react';
 import styles from"./PublisherInfo.module.css" // Assuming you have a CSS file for styling
+import { infoAxios } from '../API/API';
+import { Link, useLoaderData } from 'react-router-dom';
 
-const InfoPage = () => {
-  const licensedSeries = [
-    "Ayamachi -Yowami o Nigirare, Rouraku Sareru Shoujo-",
-    "Deka Tsuyo Mama wa Boku ni Amai.",
-    "Deredere Maid to Tsuntsun Maid to Shikotama Ecchi",
-    "Dungeon Meshi dj - Marcille Meshi",
-    "Futanari Kyokon Kuro Gal",
-    "Kigen no Warui Kuro Gal Futanari Kanojo ni Karaoke ni Yobidasareta Kekka...",
-    "Kouhai wa Koakuma mal!?",
-    // Continue the list...
-  ];
+
+const PublisherInfo = () => {
+  const loaderInfo = useLoaderData();
+
+  const {
+    publisherName,
+    alternativePublisherNameList,
+    labelList,
+    websiteUrl,
+    createdAt,
+    updatedAt,
+    descendantPublicationList
+  } = loaderInfo;
+
+  console.log(loaderInfo);
+
+  const formatDate = (dateArray) => {
+    if (!dateArray || dateArray.length < 3) return 'N/A';
+    return `${dateArray[0]}-${String(dateArray[1]).padStart(2, '0')}-${String(dateArray[2]).padStart(2, '0')}`;
+  };
 
   return (
-    <div className={styles['info-page']}>
-      <header>
-        <h1>2D Market</h1>
-        <a href="#edit-title"></a>
-      </header>
-
-      <section className={styles['attributes']}>
-        <div className={styles['attribute-group']}>
-          <div className={styles['attribute']}>
-            <strong>Alternate Names</strong> <a href="#edit-alternate-names"></a>
-            <p>N/A</p>
-          </div>
-          <div className={styles['attribute']}>
-            <strong>Notes</strong> <a href="#edit-notes"></a>
-            <p>N/A</p>
-          </div>
+    <div className={styles.container}>
+      <h1 className={styles.title}>{publisherName}</h1>
+      
+      <div className={styles.infoGrid}>
+        <div className={styles.infoItem}>
+          <h2 className={styles.infoTitle}>Alternate Names</h2>
+          <ul className={styles.list}>
+            {alternativePublisherNameList.map((name, index) => (
+              <li key={index}>{name}</li>
+            ))}
+          </ul>
         </div>
-
-        <div className={styles['attribute-group']}>
-          <div className={styles['attribute']}>
-            <strong>Type</strong> <a href="#edit-type"></a>
-            <p>English</p>
-          </div>
-          <div className={styles['attribute']}>
-            <strong>Website</strong> <a href="#edit-website"></a>
-            <p><a href="#website-link">Click Here</a></p>
-          </div>
+        
+        <div className={styles.infoItem}>
+          <h2 className={styles.infoTitle}>Website</h2>
+          <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className={styles.link}>
+            {websiteUrl}
+          </a>
         </div>
-
-        <div className={styles['attribute-group']}>
-          <div className={styles['attribute']}>
-            <strong>Last Updated</strong> <a href="#edit-last-updated"></a>
-            <p>N/A</p>
-          </div>
+        
+        <div className={styles.infoItem}>
+          <h2 className={styles.infoTitle}>Created At</h2>
+          <p>{formatDate(createdAt)}</p>
         </div>
-      </section>
+        
+        <div className={styles.infoItem}>
+          <h2 className={styles.infoTitle}>Updated At</h2>
+          <p>{formatDate(updatedAt)}</p>
+        </div>
+      </div>
 
-      <section className={styles['licensed-series']}>
-        <strong>Licensed Series</strong>
-        <ul>
-          {licensedSeries.map((series, index) => (
-            <li key={index}>{series}</li>
+      <div className={styles.publications}>
+        <h2 className={styles.infoTitle}>하위 출판사 레이블</h2>
+        <ul className={styles.publicationList}>
+          {labelList.map((label, index) => (
+            <li key={label.publisherId} className={styles.publicationItem}>
+              <Link to={`/info/publisher/${label.publisherId}`}>{label.publisherName}</Link>
+            </li>
           ))}
         </ul>
-      </section>
+      </div>
+
+
+      <div className={styles.publications}>
+        <h2 className={styles.infoTitle}>Licensed Series</h2>
+        <ul className={styles.publicationList}>
+          {descendantPublicationList.map((pub, index) => (
+            <li key={pub.publicationId} className={styles.publicationItem}>
+              <Link to={`/info/publication/${pub.publicationId}`}>{pub.title}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
-export default InfoPage;
+
+export async function publisherInfoLoader({ params, request }) {
+  const url = new URL(request.url);
+  const id = params.publisherId;
+
+  try {
+    const infoResponse = await infoAxios.get(`/publisher/${id}`);
+    return infoResponse.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+export default PublisherInfo;
