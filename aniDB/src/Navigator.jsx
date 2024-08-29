@@ -18,14 +18,14 @@ import BoardRead from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain from "./Board/BoardMain/BoardMain";
-import AdvancedSearch from "./AdvancedSearch/advancedSearch";
+import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/advancedSearch";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
-        <Route path="search" element={<AdvancedSearch />} />
+        <Route path="search" loader={advancedSearchLoader} action={advancedSearchAction} element={<AdvancedSearch />} />
         <Route path="explorer" element={<Explorer />} />
         <Route path="discover" element={<Discover />} />
         {/* subject == [publication?type=manga.lightnovel | anime |  publisher | artist] */}
