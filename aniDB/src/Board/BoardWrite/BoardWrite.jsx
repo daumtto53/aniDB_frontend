@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './BoardWrite.module.css';
+import { Form, Link, redirect, useParams } from 'react-router-dom';
+import { articleAxios } from '../../API/API';
 
 const BoardWrite = () => {
+
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const {id} = useParams();
+  console.log(id);
   return (
     <div className={styles.container}>
       <div className={styles.browserBar}>
-        <label>Subject</label>
+        {/* <label>Subject</label>
         <input 
           type="text" 
-          value="Subject"
           readOnly 
           disabled
           className={styles.urlBar}
-        />
+        /> */}
       </div>
-      <form className={styles.form}>
-        <label htmlFor="author">Author</label>
+      <Form className={styles.form} method='post'>
+        {/* <label htmlFor="author">Author</label>
         <input 
           type="text" 
-          id="author" 
-          name="author" 
-          defaultValue="john@jgraph.com" 
+          readOnly
+          disabled
           className={styles.input}
-        />
+        /> */}
         
         <label htmlFor="title">Title</label>
         <input 
           type="text" 
           id="title" 
           name="title" 
-          defaultValue="Greeting" 
+          onChange={e => setTitle(e.target.value)}
           className={styles.input}
         />
 
@@ -37,14 +43,14 @@ const BoardWrite = () => {
         <textarea 
           id="content" 
           name="content" 
-          defaultValue="Lorem ipsum" 
+          onChange={e => setContent(e.target.value)}
           className={styles.textarea}
         />
 
         <div className={styles.buttonGroup}>
-          <button type="button" className={styles.button}>
-            Go Back
-          </button>
+
+          <Link to={`/article/${id}`}>Go back</Link>
+
           <button type="button" className={styles.button}>
             attachment
           </button>
@@ -52,9 +58,44 @@ const BoardWrite = () => {
             Submit
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };
+
+export async function articleWriterLoader({ params, request }) {
+  const url = new URL(request.url);
+  const id = params.id;
+  console.log(id);
+
+  try {
+    const articleResponse = await articleAxios.get(`/${id}`);
+    // console.log(articleResponse.data);
+    return articleResponse.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function articleWriterAction({params, request}) {
+  const url = new URL(request.url);
+  const id = params.id;
+
+  let formData = await request.formData();
+
+  const dto = {
+    publicationId: params.id,
+    title: formData.get('title'),
+    content: formData.get('content'),
+  }
+
+  try {
+    const writeResponse = await articleAxios.post(`/${id}`, dto)
+    console.log(writeResponse.data);
+    return redirect(`/article/${id}`);
+  } catch(error) {
+    throw error;
+  }
+}
 
 export default BoardWrite;

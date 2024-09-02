@@ -24,3 +24,11 @@ export const advancedSearchAxios = axios.create({
 	},
 	withCredentials: true
 });
+
+export const articleAxios = axios.create({
+	baseURL: `${import.meta.env.VITE_BASEURL}/article`,
+	headers: {
+		'Content-Type': 'application/json'
+	},
+	withCredentials: true
+});

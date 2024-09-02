@@ -34,3 +34,28 @@
 .table tr:hover {
   background-color: #f5f5f5;
 }
+
+/* Column widths according to the ratios provided */
+.column-articleId {
+  width: 5%; /* 1 part */
+}
+
+.column-title {
+  width: auto; /* 5 parts */
+}
+
+.column-author {
+  width: 5%; /* 1 part */
+}
+
+.column-views {
+  width: 5%; /* 1 part */
+}
+
+.column-recommended {
+  width: 5%; /* 1 part */
+}
+
+.column-createdTime {
+  width: 25%; /* 1 part */
+}

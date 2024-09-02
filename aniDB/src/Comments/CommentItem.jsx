@@ -5,7 +5,7 @@ import LikeButton from '../Like/LikeButton';
 import { formatTimeStampToDateTime } from './../util/datetime';
 
 const CommentItem = ({ comment }) => {
-  console.log(comment);
+  console.log("commentItem", comment);
   return (
     <div className={styles.commentItem}>
       <div className={styles.profileImageContainer}>
@@ -13,7 +13,7 @@ const CommentItem = ({ comment }) => {
       </div>
       <div className={styles.commentContent}>
         <div className={styles.commentHeader}>
-          <span className={styles.author}>{comment['memberDTO'].name === null ? 1: 2}</span>
+          <span className={styles.author}>{comment['memberDTO'].nickname === null ? 'null': comment['memberDTO'].nickname}</span>
           <span className={styles.date}>{formatTimeStampToDateTime(comment['updatedAt'])}</span>
         </div>
         <textarea

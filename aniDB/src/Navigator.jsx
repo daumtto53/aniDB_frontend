@@ -13,11 +13,11 @@ import Explorer from "./Discover/Explorer";
 import Discover, { discoverAction, discoverLoader } from "./Discover/Discover";
 import PublicationInfo, { publicationInfoLoader } from "./Info/PublicationInfo";
 import PublisherInfo, { publisherInfoLoader } from "./Info/PublisherInfo";
-import BoardWrite from "./Board/BoardWrite/BoardWrite";
-import BoardRead from "./Board/BoardRead/BoardRead";
+import BoardWrite, { articleWriterAction } from "./Board/BoardWrite/BoardWrite";
+import BoardRead, { articleInfoLoader } from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
-import BoardMain from "./Board/BoardMain/BoardMain";
+import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
 import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/advancedSearch";
 
 const router = createBrowserRouter(
@@ -46,7 +46,10 @@ const router = createBrowserRouter(
         {/* <Route path="lightnovel" element={<LightNovel />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
 
-        <Route path="article/:id" element={<BoardMain />} />
+        <Route path="article/:id" loader={articleLoader} element={<BoardMain />} />
+        <Route path="article/:id/:articleId" loader={articleInfoLoader} element={<BoardRead />} />
+        <Route path="article/:id/write" action={articleWriterAction} element={<BoardWrite/>} />
+
         {/* <Route path="anime" element={<Anime />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
 
