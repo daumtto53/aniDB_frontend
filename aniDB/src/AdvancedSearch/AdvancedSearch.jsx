@@ -186,6 +186,7 @@ export async function advancedSearchAction({ params, request }) {
   const formData = await request.formData();
   //formData에서 data collect해서 DTO를 만들고, Spring에 전달이 되는지 확인하고,
   //discover/publication으로 redirect시키기.
+  //advancedSearchDTO와 같은 data도 URL의 query parameter에 포함시키기.
 
   let genres = [];
   let status = [];
@@ -222,8 +223,26 @@ export async function advancedSearchAction({ params, request }) {
 
   try {
     const response = await advancedSearchAxios.post("", advancedSearchDTO);
-    console.log(response);
-    return response.data;
+
+    // If the response is successful, construct the query parameters for redirection
+    // Manually construct query string
+    const queryString = Object.entries(advancedSearchDTO)
+      .map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return value.map((item) => `${encodeURIComponent(key)}=${encodeURIComponent(item)}`).join("&");
+        }
+        return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+      })
+      .join("&");
+    // Redirect to the desired URL
+    // const redirectUrl = `${import.meta.env.VITE_FRONTURL}/discover/publication?${queryString}`;
+    const redirectUrl = `http://localhost:5173/discover/publication?${queryString}`;
+    return redirect(redirectUrl);
+    // window.location.href = redirectUrl;
+
+
+
+    // return response.data;
   } catch (error) {
     throw error;
   }

@@ -31,7 +31,22 @@ export default function Discover() {
       `?page=${page}` +
       `&type=${searchParams.get("type")}` +
       `&option=${searchParams.get("option")}` +
-      `&searchQuery=${searchParams.get("searchQuery")}`;
+      `&searchQuery=${searchParams.get("searchQuery")}` +
+      `&title=${searchParams.get("title")}` +
+      `&publisher=${searchParams.get("publisher")}` +
+      `&typeString=${searchParams.get("typeString")}` +
+      `&startYear=${searchParams.get("yearStart")}` +
+      `&endYear=${searchParams.get("yearEnd")}` +
+      `&startVolume=${searchParams.get("volumesStart")}` +
+      `&endVolume=${searchParams.get("volumesEnd")}` +
+      searchParams
+        .getAll("genreList")
+        .map((genre) => `&genreList=${encodeURIComponent(genre)}`)
+        .join("") +
+      searchParams
+        .getAll("status")
+        .map((stat) => `&status=${encodeURIComponent(stat)}`)
+        .join("");
     navigate(url);
   };
 
@@ -125,16 +140,33 @@ export async function discoverLoader({ params, request }) {
 
   requestPageNum = requestPageNum === null ? 1 : requestPageNum;
 
+  // Constructing the advancedSearchDTO using URLSearchParams
+  const advancedSearchDTO = {
+    title: url.searchParams.get("title"), // Get 'title' from URL params
+    publisher: url.searchParams.get("publisher"), // Get 'publisher' from URL params
+    typeString: url.searchParams.get("typeString"), // Get 'type' from URL params
+    startYear: url.searchParams.get("yearStart"), // Get 'yearStart' from URL params
+    endYear: url.searchParams.get("yearEnd"), // Get 'yearEnd' from URL params
+    startVolume: url.searchParams.get("volumesStart"), // Get 'volumesStart' from URL params
+    endVolume: url.searchParams.get("volumesEnd"), // Get 'volumesEnd' from URL params
+    genreList: url.searchParams.getAll("genreList"),
+    status: url.searchParams.getAll("status"),
+  };
+
   const config = {
     params: {
       page: requestPageNum,
       option: option,
       searchQuery: searchQuery,
       typeString: type,
+      ...advancedSearchDTO,
+      genreList: advancedSearchDTO.genreList,
+      status: advancedSearchDTO.status,
     },
+    paramsSerializer: { indexes: null },
   };
-  console.log("discoverLoader");
-  console.log(config);
+
+  // Manually encode genreList and status
 
   try {
     switch (subjectPath) {
