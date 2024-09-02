@@ -19,6 +19,7 @@ import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
 import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/advancedSearch";
+import BoardModify, { articleModifyAction, articleModifyLoader } from "./Board/BoardModify/BoardModify";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
         <Route path="article/:id" loader={articleLoader} element={<BoardMain />} />
         <Route path="article/:id/:articleId" loader={articleInfoLoader} element={<BoardRead />} />
         <Route path="article/:id/write" action={articleWriterAction} element={<BoardWrite/>} />
+        <Route path="article/:id/:articleId/modify" loader={articleModifyLoader} action={articleModifyAction} element={<BoardModify />} />
 
         {/* <Route path="anime" element={<Anime />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}

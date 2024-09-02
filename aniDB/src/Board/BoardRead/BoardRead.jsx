@@ -2,27 +2,47 @@ import React from "react";
 import styles from "./BoardRead.module.css";
 import Comments from "../../Comments/Comments";
 import { articleAxios } from "../../API/API";
-import { Link, useLoaderData } from "react-router-dom";
-import { formatTimeStampToDateTime } from './../../util/datetime';
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { formatTimeStampToDateTime } from "./../../util/datetime";
 
 /** TODO
- *  
+ *
  *  1. modify
  *  2. write
  *  3. delete
  */
 const BoardRead = () => {
-
   const articleData = useLoaderData();
+  const { id, articleId } = useParams();
   console.log("articleData", articleData);
-  const commentList = articleData.commentList.map(comment => {
-    return {
-      ...comment,
-      likes: comment.upvotes,
-      nickname: comment.memberDTO.nickname,
-      anidbComment: comment.content,
+  const commentList =
+    articleData.commentList[0].commentId === null
+      ? []
+      : articleData.commentList.map((comment) => {
+          console.log("commentList", comment);
+          return {
+            ...comment,
+            likes: comment.upvotes,
+            nickname:
+              comment.memberDTO.nickname === null
+                ? "null"
+                : comment.memberDTO.nickname,
+            anidbComment: comment.content,
+          };
+        });
+
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      // Send the DELETE request
+      await articleAxios.delete(`/${id}/${articleId}`);
+      // Optionally, navigate to another page after deletion
+      navigate(`/article/${id}`); // Redirect to the list of articles
+    } catch (error) {
+      console.error("There was an error deleting the article!", error);
     }
-  });
+  };
 
   return (
     <div>
@@ -53,7 +73,11 @@ const BoardRead = () => {
             type="text"
             id="author"
             name="author"
-            value={articleData.memberDTO.nickname == null ? 'null' : articleData.memberDTO.nickname}
+            value={
+              articleData.memberDTO.nickname == null
+                ? "null"
+                : articleData.memberDTO.nickname
+            }
             className={styles.input}
             disabled
           />
@@ -93,17 +117,16 @@ const BoardRead = () => {
           />
 
           <div className={styles.buttonGroup}>
-            <Link to={`/article/${articleData.publicationId}`}>Go Back</Link>
-            <Link to="">Modify</Link>
-            <Link to="">Delete</Link>
+            <Link to={`/article/${id}`}>Go Back</Link>
+            <Link to={`/article/${id}/${articleId}/modify`}>Modify</Link>
+            <Link onClick={handleDelete}>Delete</Link>
           </div>
         </form>
       </div>
-      <Comments comments={commentList}/>
+      <Comments comments={commentList} />
     </div>
   );
 };
-
 
 export async function articleInfoLoader({ params, request }) {
   const url = new URL(request.url);
