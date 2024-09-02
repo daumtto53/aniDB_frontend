@@ -127,7 +127,7 @@ const PublicationInfo = () => {
         <LikeButton likes={loaderData.upvotes}/>
       </div>
       <div className={styles["link-to-board"]}>
-        <Link to="">Board</Link>
+        <Link to={`/article/${loaderData.publicationId}`}>Board</Link>
       </div>
       <Comments comments={loaderData.seriesCommentList} />
     </div>

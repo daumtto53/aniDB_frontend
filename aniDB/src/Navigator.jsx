@@ -46,7 +46,7 @@ const router = createBrowserRouter(
         {/* <Route path="lightnovel" element={<LightNovel />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
 
-        {/* <Route path="board" element={<Anime />} /> */}
+        <Route path="article/:id" element={<BoardMain />} />
         {/* <Route path="anime" element={<Anime />} /> */}
         {/* <Route path="anime" element={<Anime />} /> */}
 
