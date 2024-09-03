@@ -142,9 +142,9 @@ export async function discoverLoader({ params, request }) {
 
   // Constructing the advancedSearchDTO using URLSearchParams
   const advancedSearchDTO = {
-    title: url.searchParams.get("title"), // Get 'title' from URL params
-    publisher: url.searchParams.get("publisher"), // Get 'publisher' from URL params
-    typeString: url.searchParams.get("typeString"), // Get 'type' from URL params
+    title: url.searchParams.get("title") === "null" ? null : url.searchParams.get("title"), // Get 'title' from URL params
+    publisher: url.searchParams.get("publisher") ? null : url.searchParams.get("publisher"), // Get 'publisher' from URL params
+    typeString: type, // Get 'type' from URL params
     startYear: url.searchParams.get("yearStart"), // Get 'yearStart' from URL params
     endYear: url.searchParams.get("yearEnd"), // Get 'yearEnd' from URL params
     startVolume: url.searchParams.get("volumesStart"), // Get 'volumesStart' from URL params
@@ -152,6 +152,8 @@ export async function discoverLoader({ params, request }) {
     genreList: url.searchParams.getAll("genreList"),
     status: url.searchParams.getAll("status"),
   };
+
+  console.log("discoverloader", advancedSearchDTO);
 
   const config = {
     params: {
