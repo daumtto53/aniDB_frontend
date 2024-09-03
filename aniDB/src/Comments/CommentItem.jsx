@@ -5,7 +5,6 @@ import LikeButton from '../Like/LikeButton';
 import { formatTimeStampToDateTime } from './../util/datetime';
 
 const CommentItem = ({ comment }) => {
-  console.log("commentItem", comment);
   return (
     <div className={styles.commentItem}>
       <div className={styles.profileImageContainer}>

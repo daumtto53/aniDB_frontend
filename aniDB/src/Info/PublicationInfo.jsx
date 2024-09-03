@@ -25,20 +25,6 @@ const PublicationInfo = () => {
   const loaderData = useLoaderData();
   console.log(loaderData);
 
-  // const tableData = [
-  //   { label: "나도 이름", value: "" },
-  //   { label: "술종", value: "123" },
-  //   { label: "지역", value: "" },
-  //   { label: "술명사", value: "" },
-  //   { label: "알콜", value: "" },
-  //   { label: "주원료 시리즈", value: "" },
-  //   { label: "술마을", value: "" },
-  //   { label: "브랜드 이름", value: "" },
-  //   { label: "브랜드 설명", value: "" },
-  //   { label: "마디에 맞춰", value: "" },
-  //   { label: "술테이스트 노트", value: "" },
-  // ];
-
   const tableData = [
     { label: "Series Type", value: loaderData.seriesType },
     // { label: "Anime Adaptation", value: loaderData.animeAdaptationList },
@@ -145,5 +131,32 @@ export async function publicationInfoLoader({ params, request }) {
     throw error;
   }
 }
+
+export async function publicationInfoAction ({ params, request }) {
+  const url = new URL(request.url);
+  const id = params.publicationId;
+  const formData = await request.formData();
+  const intent = formData.get('intent');
+
+  const requestBody = {
+    anidbComment: formData.get('content'),
+  }
+
+
+  switch(intent) {
+    case 'comment':
+      try {
+        const infoCommentPost = await infoAxios.post(`/publication/${id}/comment`, requestBody);
+        return infoCommentPost.data;
+      } catch (error) {
+        throw error;
+      }
+    default: 
+      return null;
+    
+  }
+}
+
+
 
 export default PublicationInfo;
