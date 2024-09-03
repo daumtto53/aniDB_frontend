@@ -20,6 +20,7 @@ import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
 import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/advancedSearch";
 import BoardModify, { articleModifyAction, articleModifyLoader } from "./Board/BoardModify/BoardModify";
+import Logout from "./Logout/Logout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +63,8 @@ const router = createBrowserRouter(
         <Route path="profile" element={<Profile />} />
         <Route path="modifyprofile" element={<ModifyProfile />} />
         <Route path="board" element={<BoardMain />} />
+
+        <Route path="logout" element={<Logout />} />
       </Route>
     </>
   )

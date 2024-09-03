@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import axios from 'axios';
 
 import styles from "./RootLayout.module.css";
+
 
 import banner from "../../resources/banner.jpg";
 
@@ -9,18 +11,18 @@ const handleLogin = () => {
 	window.location.href = `${import.meta.env.VITE_BASEURL}/${import.meta.env.VITE_LOGIN_API_NAVER}`
 }
 
-const handleLogout = () => {
+const handleLogout = async () => {
 	const axiosObject = axios.create({
 		baseURL: `${import.meta.env.VITE_BASEURL}`,
 		withCredentials: true
 	});
 
 	try {
-		const response = axiosObject.post('/api/logout', {});
+		const response = await axiosObject.post('/api/logout');
+    window.location.href = `${import.meta.env.VITE_FRONTURL}/logout`;
 	} catch (error) {
 		console.log('Error logging out', error);
 	}
-
 }
 
 function RootLayout() {
@@ -49,7 +51,7 @@ function RootLayout() {
               </Link>
             </li>
             <li>
-              <Link>Logout</Link>
+              <Link onClick={() => {handleLogout()}}>Logout</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
