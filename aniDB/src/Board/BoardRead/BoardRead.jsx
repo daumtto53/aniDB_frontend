@@ -19,7 +19,6 @@ const BoardRead = () => {
     articleData.commentList[0].commentId === null
       ? []
       : articleData.commentList.map((comment) => {
-          console.log("commentList", comment);
           return {
             ...comment,
             likes: comment.upvotes,
@@ -133,11 +132,9 @@ export async function articleInfoLoader({ params, request }) {
   const url = new URL(request.url);
   const id = params.id;
   const articleId = params.articleId;
-  console.log(id, articleId);
 
   try {
     const articleResponse = await articleAxios.get(`/${id}/${articleId}`);
-    console.log(articleResponse.data);
     return articleResponse.data;
   } catch (error) {
     throw error;
@@ -152,7 +149,6 @@ export async function articleInfoAction({params, request}) {
   const formData = await request.formData();
   const intent = formData.get('intent');
   const commentId = formData.get('commentId');
-  console.log('articleInfoAction', intent, articleId, id, formData.get('content'));
 
   const requestBody = {
     content : formData.get('content'),
@@ -169,7 +165,6 @@ export async function articleInfoAction({params, request}) {
       }
     case 'deleteComment':
       try {
-        console.log('eleteComment');
         const articleCommentDelete = await articleAxios.delete(`/${id}/${articleId}/comment/${commentId}`);
         return articleCommentDelete.data;
       } catch (error) {

@@ -4,7 +4,6 @@ import CommentItem from './CommentItem';
 import CommentForm from './CommentForm';
 
 const Comments = ({ comments }) => {
-  console.log(comments);
   return (
     <div className={styles.commentsContainer}>
       <h3 className={styles.commentsHeader}>Comments</h3>

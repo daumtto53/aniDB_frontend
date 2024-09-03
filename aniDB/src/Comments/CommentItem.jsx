@@ -6,7 +6,6 @@ import { formatTimeStampToDateTime } from './../util/datetime';
 import { Form } from 'react-router-dom';
 
 const CommentItem = ({ comment}) => {
-  console.log(comment);
 
   return (
     <div className={styles.commentItem}>
