@@ -137,6 +137,8 @@ export async function publicationInfoAction ({ params, request }) {
   const id = params.publicationId;
   const formData = await request.formData();
   const intent = formData.get('intent');
+  const commentId = formData.get('commentId');
+  console.log(commentId);
 
   const requestBody = {
     anidbComment: formData.get('content'),
@@ -147,6 +149,14 @@ export async function publicationInfoAction ({ params, request }) {
     case 'comment':
       try {
         const infoCommentPost = await infoAxios.post(`/publication/${id}/comment`, requestBody);
+        return infoCommentPost.data;
+      } catch (error) {
+        throw error;
+      }
+    case 'deleteComment':
+      try {
+        console.log('eleteComment');
+        const infoCommentPost = await infoAxios.delete(`/publication/${id}/comment/${commentId}`);
         return infoCommentPost.data;
       } catch (error) {
         throw error;

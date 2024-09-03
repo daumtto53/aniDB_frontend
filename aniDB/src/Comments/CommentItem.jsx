@@ -3,8 +3,11 @@ import styles from './CommentItem.module.css';
 
 import LikeButton from '../Like/LikeButton';
 import { formatTimeStampToDateTime } from './../util/datetime';
+import { Form } from 'react-router-dom';
 
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ comment}) => {
+  console.log(comment);
+
   return (
     <div className={styles.commentItem}>
       <div className={styles.profileImageContainer}>
@@ -22,9 +25,11 @@ const CommentItem = ({ comment }) => {
         />
         <div className={styles.commentFooter}>
           <div className={styles.buttonGroup}>
-            <button className={styles.button}>Modify</button>
-            <button className={styles.button}>Delete</button>
-            <button className={styles.button}>Submit</button>
+            {/* <button className={styles.button}>Modify</button> */}
+            <Form method='post'>
+              <input type='hidden' name='commentId' value={comment.seriesCommentId} />
+              <button type='submit' name='intent' value='deleteComment' className={styles.button}>Delete</button>
+            </Form>
           </div>
           <LikeButton initialLikes={comment.likes} />
         </div>
