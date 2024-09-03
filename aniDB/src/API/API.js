@@ -32,3 +32,12 @@ export const articleAxios = axios.create({
 	},
 	withCredentials: true
 });
+
+export const upvoteAxios = axios.create({
+	baseURL: `${import.meta.env.VITE_BASEURL}/upvote`,
+	headers: {
+		'Content-Type': 'application/json'
+	},
+	withCredentials: true
+});
+

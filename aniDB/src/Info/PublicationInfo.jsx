@@ -14,12 +14,8 @@ import {
 import AlternativeTitleTable from "./AlternativeTitleTable";
 import RelatedSeriesTable from "./RelatedSeriesTable";
 import AnimeAdaptationTable from "./AnimeAdaptationTable";
+import PublicationLikeButton from "./PublicationLikeButton";
 
-
-
-function formatGenreListToString(genreList) {
-
-}
 
 const PublicationInfo = () => {
   const loaderData = useLoaderData();
@@ -110,7 +106,7 @@ const PublicationInfo = () => {
       </div>
       <div className={styles["lorem-ipsum"]}>{loaderData.description}</div>
       <div className={styles.like}>
-        <LikeButton likes={loaderData.upvotes}/>
+        <PublicationLikeButton initialLikes={loaderData.upvotes} likeFrom='publicationInfo' id={loaderData.publicationId}/>
       </div>
       <div className={styles["link-to-board"]}>
         <Link to={`/article/${loaderData.publicationId}`}>Board</Link>
