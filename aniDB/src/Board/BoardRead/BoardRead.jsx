@@ -123,7 +123,7 @@ const BoardRead = () => {
           </div>
         </form>
       </div>
-      <Comments comments={commentList} />
+      <Comments comments={commentList} likeFrom='articleComment'/>
     </div>
   );
 };

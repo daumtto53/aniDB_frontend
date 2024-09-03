@@ -111,7 +111,7 @@ const PublicationInfo = () => {
       <div className={styles["link-to-board"]}>
         <Link to={`/article/${loaderData.publicationId}`}>Board</Link>
       </div>
-      <Comments comments={loaderData.seriesCommentList} />
+      <Comments comments={loaderData.seriesCommentList} likeFrom="publicationComment" />
     </div>
   );
 };
