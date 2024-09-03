@@ -23,6 +23,7 @@ const BoardRead = () => {
           return {
             ...comment,
             likes: comment.upvotes,
+            seriesCommentId: comment.commentId,
             nickname:
               comment.memberDTO.nickname === null
                 ? "null"
@@ -141,6 +142,44 @@ export async function articleInfoLoader({ params, request }) {
   } catch (error) {
     throw error;
   }
+}
+
+export async function articleInfoAction({params, request}) {
+  const url = new URL(request.url);
+  const id = params.id;
+  const articleId = params.articleId;
+
+  const formData = await request.formData();
+  const intent = formData.get('intent');
+  const commentId = formData.get('commentId');
+  console.log('articleInfoAction', intent, articleId, id, formData.get('content'));
+
+  const requestBody = {
+    content : formData.get('content'),
+  }
+
+
+  switch(intent) {
+    case 'comment':
+      try {
+        const articleCommentPost = await articleAxios.post(`/${id}/${articleId}/comment`, requestBody);
+        return articleCommentPost.data;
+      } catch (error) {
+        throw error;
+      }
+    case 'deleteComment':
+      try {
+        console.log('eleteComment');
+        const articleCommentDelete = await articleAxios.delete(`/${id}/${articleId}/comment/${commentId}`);
+        return articleCommentDelete.data;
+      } catch (error) {
+        throw error;
+      }
+    default: 
+      return null;
+    
+  }
+
 }
 
 export default BoardRead;

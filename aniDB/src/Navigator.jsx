@@ -14,7 +14,7 @@ import Discover, { discoverAction, discoverLoader } from "./Discover/Discover";
 import PublicationInfo, { publicationInfoAction, publicationInfoLoader } from "./Info/PublicationInfo";
 import PublisherInfo, { publisherInfoLoader } from "./Info/PublisherInfo";
 import BoardWrite, { articleWriterAction } from "./Board/BoardWrite/BoardWrite";
-import BoardRead, { articleInfoLoader } from "./Board/BoardRead/BoardRead";
+import BoardRead, { articleInfoAction, articleInfoLoader } from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
@@ -48,7 +48,7 @@ const router = createBrowserRouter(
         {/* <Route path="anime" element={<Anime />} /> */}
 
         <Route path="article/:id" loader={articleLoader} element={<BoardMain />} />
-        <Route path="article/:id/:articleId" loader={articleInfoLoader} element={<BoardRead />} />
+        <Route path="article/:id/:articleId" loader={articleInfoLoader} action={articleInfoAction} element={<BoardRead />} />
         <Route path="article/:id/write" action={articleWriterAction} element={<BoardWrite/>} />
         <Route path="article/:id/:articleId/modify" loader={articleModifyLoader} action={articleModifyAction} element={<BoardModify />} />
 
