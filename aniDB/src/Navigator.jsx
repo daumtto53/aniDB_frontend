@@ -18,7 +18,7 @@ import BoardRead, { articleInfoAction, articleInfoLoader } from "./Board/BoardRe
 import Profile from "./Profile/Profile";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
-import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/advancedSearch";
+import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/AdvancedSearch";
 import BoardModify, { articleModifyAction, articleModifyLoader } from "./Board/BoardModify/BoardModify";
 import Logout from "./Logout/Logout";
 
