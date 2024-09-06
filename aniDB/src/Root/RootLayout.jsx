@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
 
 import styles from "./RootLayout.module.css";
@@ -26,7 +26,8 @@ const handleLogout = async () => {
 
   try {
     const response = await axiosObject.post("/api/logout");
-    window.location.href = `${import.meta.env.VITE_FRONTURL}/logout`;
+    // window.location.href = `${import.meta.env.VITE_FRONTURL}/logout`;
+    window.location.href = `${import.meta.env.VITE_FRONTURL}`;
   } catch (error) {
     console.log("Error logging out", error);
   }
