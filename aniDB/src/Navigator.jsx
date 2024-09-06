@@ -16,9 +16,9 @@ import PublisherInfo, { publisherInfoLoader } from "./Info/PublisherInfo";
 import BoardWrite, { articleWriterAction } from "./Board/BoardWrite/BoardWrite";
 import BoardRead, { articleInfoAction, articleInfoLoader } from "./Board/BoardRead/BoardRead";
 import Profile from "./Profile/Profile";
+import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/AdvancedSearch";
 import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
-import AdvancedSearch, { advancedSearchAction, advancedSearchLoader } from "./AdvancedSearch/AdvancedSearch";
 import BoardModify, { articleModifyAction, articleModifyLoader } from "./Board/BoardModify/BoardModify";
 import Logout from "./Logout/Logout";
 
