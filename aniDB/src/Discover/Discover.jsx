@@ -27,18 +27,21 @@ export default function Discover() {
   }, [pageInfo.page, pageInfo.totalPage]);
 
   const handlePageChange = (page) => {
+    console.log('typeString', searchParams.get("typeString"));
+    console.log('typeString', searchParams.get("typeString"));
+  
     const url =
       `?page=${page}` +
-      `&type=${searchParams.get("type")}` +
-      `&option=${searchParams.get("option")}` +
-      `&searchQuery=${searchParams.get("searchQuery")}` +
-      `&title=${searchParams.get("title")}` +
-      `&publisher=${searchParams.get("publisher")}` +
-      `&typeString=${searchParams.get("typeString")}` +
-      `&startYear=${searchParams.get("yearStart")}` +
-      `&endYear=${searchParams.get("yearEnd")}` +
-      `&startVolume=${searchParams.get("volumesStart")}` +
-      `&endVolume=${searchParams.get("volumesEnd")}` +
+      `&type=${searchParams.get("type") || ''}` +
+      `&option=${searchParams.get("option") || ''}` +
+      `&searchQuery=${searchParams.get("searchQuery") || ''}` +
+      `&title=${searchParams.get("title") || ''}` +
+      `&publisher=${searchParams.get("publisher") || ''}` +
+      `&typeString=${searchParams.get("typeString") || ''}` +
+      `&startYear=${searchParams.get("yearStart") || ''}` +
+      `&endYear=${searchParams.get("yearEnd") || ''}` +
+      `&startVolume=${searchParams.get("volumesStart") || ''}` +
+      `&endVolume=${searchParams.get("volumesEnd") || ''}` +
       searchParams
         .getAll("genreList")
         .map((genre) => `&genreList=${encodeURIComponent(genre)}`)
@@ -47,6 +50,7 @@ export default function Discover() {
         .getAll("status")
         .map((stat) => `&status=${encodeURIComponent(stat)}`)
         .join("");
+  
     navigate(url);
   };
 
