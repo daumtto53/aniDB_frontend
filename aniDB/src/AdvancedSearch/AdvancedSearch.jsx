@@ -236,7 +236,7 @@ export async function advancedSearchAction({ params, request }) {
       .join("&");
     // Redirect to the desired URL
     // const redirectUrl = `${import.meta.env.VITE_FRONTURL}/discover/publication?${queryString}`;
-    const redirectUrl = `http://localhost:5173/discover/publication?${queryString}`;
+    const redirectUrl = `${import.meta.env.VITE_BASEURL}/discover/publication?${queryString}`;
     return redirect(redirectUrl);
     // window.location.href = redirectUrl;
 
