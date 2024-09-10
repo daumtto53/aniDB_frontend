@@ -21,6 +21,8 @@ import ModifyProfile from "./Profile/ModifyProfile";
 import BoardMain, { articleLoader } from "./Board/BoardMain/BoardMain";
 import BoardModify, { articleModifyAction, articleModifyLoader } from "./Board/BoardModify/BoardModify";
 import Logout from "./Logout/Logout";
+import BasicLogin, { loginAction } from "./BasicLogin/BasicLogin";
+import Register, { registerAction } from "./Register/Register";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -65,6 +67,8 @@ const router = createBrowserRouter(
         <Route path="board" element={<BoardMain />} />
 
         <Route path="logout" element={<Logout />} />
+        <Route path="login" action={loginAction}  element={<BasicLogin />} />
+        <Route path="register" action={registerAction} element={<Register />} />
       </Route>
     </>
   )

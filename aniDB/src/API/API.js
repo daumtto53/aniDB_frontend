@@ -41,3 +41,19 @@ export const upvoteAxios = axios.create({
 	withCredentials: true
 });
 
+export const apiAxios = axios.create({
+	baseURL: `${import.meta.env.VITE_BASEURL}/api`,
+	headers: {
+		'Content-Type': 'application/json'
+	},
+	withCredentials: true
+});
+
+
+export const loginAxios = axios.create({
+	baseURL: `${import.meta.env.VITE_BASEURL}/login`,
+	headers: {
+		'Content-Type': 'application/json'
+	},
+	withCredentials: true
+});
